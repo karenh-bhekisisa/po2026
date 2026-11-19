@@ -14,8 +14,6 @@
         --surface:#fcfcfb; --plane:#f4f4f1; --ink:#0b0b0b; --ink-2:#52514e;
         --ink-muted:#898781; --rule:#e1e0d9; --axis:#c3c2b7;
         --accent:#2a78d6;      /* the law / interactive          */
-        --fig-light:#8cc0ec;   /* figures: head end of the gradient */
-        --fig-dark:#0d3b6e;    /* figures: foot end                 */
         --flag:#d03b3b;        /* myths, quick exit              */
         --radius:10px;
         --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
@@ -79,25 +77,17 @@
         .chip .t{font-size:.83rem;font-weight:600;line-height:1.18;hyphens:auto}
         .chip[aria-current="step"] .t{color:var(--accent)}
         .chip[aria-current="step"] .num{color:var(--accent)}
-        /* The figure takes every pixel the number and the label leave behind:
-        .ic is the leftover space, and the SVG fills it. preserveAspectRatio
-        keeps the 1:1 viewBox undistorted, so no cap is needed. */
+        /* The icon takes every pixel the number and the label leave behind: .ic
+        is the leftover space, and the SVG fills it. Each icon carries its own
+        viewBox (they were drawn on 32, 64 and 512 grids), and the default
+        preserveAspectRatio scales each one to fit this square box without
+        distorting it, so no cap and no per-icon sizing is needed. */
         .chip .ic{flex:1;min-height:0;width:100%;padding-top:4px}
         .chip svg{display:block;width:100%;height:100%}
-        /* f = filled body parts, l = limbs, o = outlined props. All three take the
-        one gradient in <defs>, which is laid out in the 0-64 user space of each
-        figure, so head, torso and props sit on a single continuous ramp rather
-        than each repeating the full range. The current stage is marked by the
-        card's border and tint, so the figures stay identical throughout. */
-        .chip svg .f{fill:url(#poBlue);stroke:none}
-        .chip svg .l{fill:none;stroke:url(#poBlue);stroke-width:5;
-        stroke-linecap:round;stroke-linejoin:round}
-        .chip svg .o{fill:none;stroke:url(#poBlue);stroke-width:3.2;
-        stroke-linecap:round;stroke-linejoin:round}
-        /* var() does not resolve inside an SVG presentation attribute, so the two
-        stops are coloured here; the hex in the markup is the fallback. */
-        #poBlue .s-light{stop-color:var(--fig-light)}
-        #poBlue .s-dark{stop-color:var(--fig-dark)}
+        /* The icons carry their own fills, so there is nothing to colour here:
+        each one is dropped in exactly as it was drawn. The current stage is
+        marked by the card's border and tint, so the icons stay identical
+        throughout and the eye goes to the card, not the artwork. */
         @media (max-width:560px){
         .rail{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
         .chip .t{font-size:.92rem}
@@ -176,18 +166,6 @@
 </style>
 </head>
 <body>
-    <!-- The figures' one gradient. userSpaceOnUse ties it to the 0-64 viewBox of
-         each figure, so every part of her is on the same pale-to-deep ramp. -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-        <defs>
-            <linearGradient id="poBlue" gradientUnits="userSpaceOnUse"
-                            x1="0" y1="6" x2="0" y2="56">
-                <stop class="s-light" offset="0" stop-color="#8cc0ec"/>
-                <stop class="s-dark" offset="1" stop-color="#0d3b6e"/>
-            </linearGradient>
-        </defs>
-    </svg>
-
     <div class="wrap">
 
         <section class="panel" aria-labelledby="h-w">
@@ -227,25 +205,24 @@ const $ = id => document.getElementById(id);
 const num = n => n.toLocaleString('en-ZA').replace(/[, ]/g, ' ');
 
 /* Filled in by load(); see po-stages.json and po-icons.json for the shapes. */
-let STAGES = [], SOURCE = '', ICONS = {}, VIEWBOX = '0 0 64 64';
+let STAGES = [], SOURCE = '', ICONS = {};
+const FALLBACK_VIEWBOX = '0 0 64 64';
 let i = 0;
 
 /* ---------------------------------------------------------------------------
-   Assemble the figures from po-icons.json. Shared body parts are drawn once
-   per icon; `arms` is the pose, `prop` is what she is using. A figure holding
-   something is shifted left to make room for it, unless the icon says not to.
+   Read the icons out of poicons.json. Each entry is the inside of one SVG plus
+   the viewBox it was drawn on, so an icon can come from any grid; keys starting
+   with an underscore are notes to the reader and are skipped.
    --------------------------------------------------------------------------- */
 function buildIcons(spec) {
-  VIEWBOX = spec.viewBox || VIEWBOX;
-  const body = (spec.body || []).map(k => spec.shared[k] || '').join('');
+  const fallback = spec.defaultViewBox || FALLBACK_VIEWBOX;
   const out = {};
   for (const [name, ic] of Object.entries(spec.icons || {})) {
     if (name.startsWith('_')) continue;
-    const arms = ic.arms || (ic.armsRef ? spec.shared[ic.armsRef] || '' : '');
-    const prop = ic.prop || '';
-    const shift = prop && ic.shift !== false && spec.propShift
-      ? ` transform="${spec.propShift}"` : '';
-    out[name] = `<g${shift}>${body}${arms}</g>${prop}`;
+    out[name] = {
+      viewBox: ic.viewBox || fallback,
+      svg: ic.svg || ''
+    };
   }
   return out;
 }
@@ -296,13 +273,18 @@ async function load() {
 }
 
 function buildRail() {
-  $('rail').innerHTML = STAGES.map((s, n) =>
-    `<button class="chip" type="button" role="tab" data-go="${n}"
+  $('rail').innerHTML = STAGES.map((s, n) => {
+    /* An unknown or missing icon leaves an empty square rather than a broken
+       card, so a typo in poprocess.json costs a picture and not the page. */
+    const ic = ICONS[s.icon] || { viewBox: FALLBACK_VIEWBOX, svg: '' };
+    return `<button class="chip" type="button" role="tab" data-go="${n}"
              aria-label="Stage ${n + 1}: ${s.short}">
        <span class="num">${n + 1}</span>
        <span class="t">${s.short}</span>
-       <span class="ic"><svg viewBox="${VIEWBOX}" aria-hidden="true">${ICONS[s.icon] || ''}</svg></span>
-     </button>`).join('');
+       <span class="ic"><svg viewBox="${ic.viewBox}" aria-hidden="true"
+              focusable="false">${ic.svg}</svg></span>
+     </button>`;
+  }).join('');
 }
 
 function render() {
