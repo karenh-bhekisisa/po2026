@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+ 
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protection Orders 2026 - The Process</title>
+    <style>
+     
+        :root{
+        color-scheme: light;
+        --bg:#ffffff;
+        --surface:#fcfcfb; --plane:#f4f4f1; --ink:#0b0b0b; --ink-2:#52514e;
+        --ink-muted:#898781; --rule:#e1e0d9; --axis:#c3c2b7;
+        --accent:#2a78d6;      /* the law / interactive          */
+        --fig-light:#8cc0ec;   /* figures: head end of the gradient */
+        --fig-dark:#0d3b6e;    /* figures: foot end                 */
+        --flag:#d03b3b;        /* myths, quick exit              */
+        --radius:10px;
+        --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+        
+        }
+
+        *{box-sizing:border-box}
+        html,body{margin:0}
+        body{
+            background:var(--bg);
+            color:var(--ink);
+            /* font-family:var(--font);*/
+            font-family: 'Source Sans 3', 'Open Sans', 'Source Sans Pro', sans-serif;
+            font-size:17px;
+            line-height:1.5;
+            -webkit-text-size-adjust:100%;
+            padding:4px
+            }
+
+        /* .wrap{max-width:660px;margin:0 auto} */
+        .wrap{margin:0 auto}
+
+        .panel{background:var(--surface);
+            border:1px solid var(--rule);
+            border-radius:var(--radius);
+            padding:20px 18px;
+            margin:0 0 12px}
+
+        h1{font-size:1.45rem;line-height:1.2;margin:0 0 .4em;letter-spacing:-.01em}
+        h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;
+        color:var(--ink-muted);margin:0 0 .9em;font-weight:600}
+        p{margin:0 0 .8em}
+        .lede{color:var(--ink-2);font-size:1rem}
+        .small{font-size:.82rem;color:var(--ink-muted);line-height:1.45}
+        :focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+        /* --- safety bar ---------------------------------------------------------- */
+        .safety{display:flex;gap:10px;align-items:center;justify-content:space-between;
+        flex-wrap:wrap;background:var(--surface);border:1px solid var(--rule);
+        border-radius:var(--radius);padding:9px 12px;margin:0 0 12px}
+        .exit{font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;background:var(--flag);
+        color:#fff;border:0;border-radius:999px;padding:8px 15px}
+        .helpline{font-size:.84rem;color:var(--ink-2)}
+        .helpline b{color:var(--ink);white-space:nowrap}
+
+        /* --- stage grid ---------------------------------------------------------
+        Eight square cards: four across on a wide screen (two rows of four), two
+        across on a phone (four rows of two). Fixed column counts rather than
+        auto-fit, because eight items at three columns leaves a ragged last row. */
+        .rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 22px}
+        .chip{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+        aspect-ratio:1/1;text-align:center;cursor:pointer;font:inherit;
+        background:transparent;color:var(--ink);border:1.5px solid var(--axis);
+        border-radius:10px;padding:11px 7px 9px;
+        transition:background .12s,border-color .12s}
+        .chip:hover{border-color:var(--ink-2)}
+        .chip[aria-current="step"]{border-color:var(--accent);
+        background:color-mix(in srgb,var(--accent) 10%,transparent)}
+        .chip .num{font-size:.66rem;font-weight:700;letter-spacing:.08em;color:var(--ink-muted);
+        line-height:1;margin-bottom:5px;font-variant-numeric:tabular-nums}
+        .chip .t{font-size:.83rem;font-weight:600;line-height:1.18;hyphens:auto}
+        .chip[aria-current="step"] .t{color:var(--accent)}
+        .chip[aria-current="step"] .num{color:var(--accent)}
+        /* The figure takes every pixel the number and the label leave behind:
+        .ic is the leftover space, and the SVG fills it. preserveAspectRatio
+        keeps the 1:1 viewBox undistorted, so no cap is needed. */
+        .chip .ic{flex:1;min-height:0;width:100%;padding-top:4px}
+        .chip svg{display:block;width:100%;height:100%}
+        /* f = filled body parts, l = limbs, o = outlined props. All three take the
+        one gradient in <defs>, which is laid out in the 0-64 user space of each
+        figure, so head, torso and props sit on a single continuous ramp rather
+        than each repeating the full range. The current stage is marked by the
+        card's border and tint, so the figures stay identical throughout. */
+        .chip svg .f{fill:url(#poBlue);stroke:none}
+        .chip svg .l{fill:none;stroke:url(#poBlue);stroke-width:5;
+        stroke-linecap:round;stroke-linejoin:round}
+        .chip svg .o{fill:none;stroke:url(#poBlue);stroke-width:3.2;
+        stroke-linecap:round;stroke-linejoin:round}
+        /* var() does not resolve inside an SVG presentation attribute, so the two
+        stops are coloured here; the hex in the markup is the fallback. */
+        #poBlue .s-light{stop-color:var(--fig-light)}
+        #poBlue .s-dark{stop-color:var(--fig-dark)}
+        @media (max-width:560px){
+        .rail{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+        .chip .t{font-size:.92rem}
+        }
+        @media (max-width:330px){.rail{grid-template-columns:1fr}.chip{aspect-ratio:auto}}
+
+        /* --- stage body ---------------------------------------------------------- */
+        .stagehead{display:flex;align-items:baseline;gap:10px;margin:6px 0 2px}
+        .stagenum{font-size:.75rem;font-weight:700;letter-spacing:.08em;color:var(--ink-muted);
+        text-transform:uppercase;white-space:nowrap}
+        h3{font-size:1.25rem;line-height:1.25;margin:0 0 .5em;letter-spacing:-.01em}
+        .where{font-size:.8rem;color:var(--ink-muted);margin:0 0 1em;
+        border-bottom:1px solid var(--rule);padding-bottom:.8em}
+        /* "What should happen" is plain markup, always on screen. The myths are a
+        native <details>, so they are keyboard accessible and still open if the
+        script fails. */
+        .block{border-left:4px solid var(--rule);padding:0 0 0 14px;margin:0 0 12px}
+        .block.law{border-color:var(--accent)}
+        summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;
+        padding:5px 0;border-radius:4px}
+        summary::-webkit-details-marker{display:none}
+        summary:hover .lbl,summary:hover .sumtext{color:var(--ink)}
+        .lbl{flex:1;font-size:.72rem;font-weight:700;letter-spacing:.06em;
+        text-transform:uppercase}
+        .block.law .lbl{color:var(--accent);display:block;padding:5px 0}
+        .chev{flex:none;width:17px;height:17px;stroke:var(--ink-muted);fill:none;
+        stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .18s}
+        details[open] > summary .chev{transform:rotate(180deg)}
+        .block .body{padding:4px 0 10px}
+        .block p{margin:0 0 .6em;font-size:.97rem}
+        .block p:last-child{margin:0}
+
+        /* --- branch cards -------------------------------------------------------- */
+        .branches{display:grid;gap:8px;margin:.2em 0 .6em}
+        .branch{border:1px solid var(--rule);border-radius:8px;padding:11px 13px}
+        .branch b{display:block;font-size:.9rem;margin-bottom:.2em}
+        .branch span{font-size:.88rem;color:var(--ink-2)}
+
+        /* --- myths --------------------------------------------------------------- */
+        .mythwrap{border:1px solid var(--rule);border-left:4px solid var(--flag);
+        border-radius:8px;padding:2px 14px;margin:0 0 12px}
+        .mythwrap > summary{padding:10px 0}
+        .mythwrap .sumtext{flex:1;font-size:.92rem;font-weight:600;color:var(--flag)}
+        .mythwrap .body{padding:0 0 10px}
+        .myth{border-top:1px solid var(--rule);padding:11px 0 0;margin:0 0 11px}
+        .myth:last-child{margin:0}
+        .myth .claim{font-style:italic;color:var(--ink-2);margin:0 0 .35em;font-size:.95rem}
+        .myth .truth{margin:0;font-size:.93rem}
+        .myth .truth b{color:var(--flag);text-transform:uppercase;font-size:.72rem;
+        letter-spacing:.05em;margin-right:.4em;font-weight:700}
+
+        @media (prefers-reduced-motion:reduce){.chev{transition:none}}
+        .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+        @media (max-width:420px){
+        body{font-size:16px}
+        h3{font-size:1.1rem}
+        }
+        /* Footer styles */
+        .footer {
+        margin-top: 30px;
+        padding: 20px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        }
+
+        .footer-text {
+        font-size: 14px;
+        color: #666;
+        text-align: left;
+        }
+
+        .footer-logo {
+        width: 240px;
+        }
+</style>
+</head>
+<body>
+    <!-- The figures' one gradient. userSpaceOnUse ties it to the 0-64 viewBox of
+         each figure, so every part of her is on the same pale-to-deep ramp. -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+            <linearGradient id="poBlue" gradientUnits="userSpaceOnUse"
+                            x1="0" y1="6" x2="0" y2="56">
+                <stop class="s-light" offset="0" stop-color="#8cc0ec"/>
+                <stop class="s-dark" offset="1" stop-color="#0d3b6e"/>
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <div class="wrap">
+
+        <section class="panel" aria-labelledby="h-w">
+            <h2 id="h-w">The process</h2>
+
+            <div class="rail" id="rail" role="tablist" aria-label="Stages"></div>
+
+            <div id="stage"></div>
+            <p class="sr" id="live" aria-live="polite"></p>
+        </section>
+        
+           
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-text">
+                <i id="source-cite"></i>
+            </div>
+            <img id="footer-logo" src="" alt="" class="footer-logo" hidden>
+        </div>
+
+    </div>
+
+
+</body>
+
+<script>
+/* ===========================================================================
+   DATA — where the two JSON files live. Relative to this page; absolute URLs
+   work too, as long as they are same-origin or CORS-enabled.
+   =========================================================================== */
+const DATA = {
+  stages: 'poprocess.json',
+  icons:  'poicons.json'
+};
+
+const $ = id => document.getElementById(id);
+const num = n => n.toLocaleString('en-ZA').replace(/[, ]/g, ' ');
+
+/* Filled in by load(); see po-stages.json and po-icons.json for the shapes. */
+let STAGES = [], SOURCE = '', ICONS = {}, VIEWBOX = '0 0 64 64';
+let i = 0;
+
+/* ---------------------------------------------------------------------------
+   Assemble the figures from po-icons.json. Shared body parts are drawn once
+   per icon; `arms` is the pose, `prop` is what she is using. A figure holding
+   something is shifted left to make room for it, unless the icon says not to.
+   --------------------------------------------------------------------------- */
+function buildIcons(spec) {
+  VIEWBOX = spec.viewBox || VIEWBOX;
+  const body = (spec.body || []).map(k => spec.shared[k] || '').join('');
+  const out = {};
+  for (const [name, ic] of Object.entries(spec.icons || {})) {
+    if (name.startsWith('_')) continue;
+    const arms = ic.arms || (ic.armsRef ? spec.shared[ic.armsRef] || '' : '');
+    const prop = ic.prop || '';
+    const shift = prop && ic.shift !== false && spec.propShift
+      ? ` transform="${spec.propShift}"` : '';
+    out[name] = `<g${shift}>${body}${arms}</g>${prop}`;
+  }
+  return out;
+}
+
+/* --- footer citation ------------------------------------------------------- */
+function buildSource(src) {
+  if (!src) return;
+  const cite = [src.label, src.citation].filter(Boolean).join(' ');
+  if (cite) $('source-cite').innerHTML = cite;
+
+  const logo = src.logo;
+  if (logo && logo.src) {
+    const img = $('footer-logo');
+    img.src = logo.src;
+    img.alt = logo.alt || '';
+    img.hidden = false;
+  }
+}
+
+async function getJSON(url) {
+  const r = await fetch(url, { cache: 'no-cache' });
+  if (!r.ok) throw new Error(`${url} — ${r.status} ${r.statusText}`);
+  return r.json();
+}
+
+async function load() {
+  try {
+    const [stageFile, iconFile] = await Promise.all([
+      getJSON(DATA.stages), getJSON(DATA.icons)
+    ]);
+    STAGES = stageFile.stages || [];
+    SOURCE = stageFile.source || '';
+    ICONS  = buildIcons(iconFile);
+    if (!STAGES.length) throw new Error(`${DATA.stages} — no stages in the file`);
+  } catch (err) {
+    /* Nothing to show, so say so plainly and keep the helpline on screen. */
+    $('stage').innerHTML = `<p class="where" style="border:0">This walkthrough
+      could not load its content. If you need help now, the GBV Command Centre
+      is on <b>0800 428 428</b>, free, 24 hours.</p>
+      <p class="small">${String(err.message || err)}</p>`;
+    postHeight();
+    return;
+  }
+  buildRail();
+  buildSource(SOURCE);
+  /* $('src').innerHTML = SOURCE;*/
+  render();
+}
+
+function buildRail() {
+  $('rail').innerHTML = STAGES.map((s, n) =>
+    `<button class="chip" type="button" role="tab" data-go="${n}"
+             aria-label="Stage ${n + 1}: ${s.short}">
+       <span class="num">${n + 1}</span>
+       <span class="t">${s.short}</span>
+       <span class="ic"><svg viewBox="${VIEWBOX}" aria-hidden="true">${ICONS[s.icon] || ''}</svg></span>
+     </button>`).join('');
+}
+
+function render() {
+  const s = STAGES[i];
+  const parts = [];
+  const CHEV = '<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+  const sum = (inner) => `<summary>${inner}${CHEV}</summary>`;
+
+  parts.push(`<div class="stagehead"><span class="stagenum">Stage ${i + 1} of ${STAGES.length}</span></div>`);
+  parts.push(`<h3>${s.title}</h3>`);
+  parts.push(`<p class="where">Where: ${s.where}</p>`);
+
+  /* The law, always on screen: a reader mid-process should not have to open
+     anything to find out what is supposed to happen. */
+  const branches = s.branches ? `<div class="branches">${s.branches.map(b =>
+    `<div class="branch"><b>${b.t}</b><span>${b.b}</span></div>`).join('')}</div>` : '';
+  if (s.law) parts.push(`<div class="block law">
+    <span class="lbl">What should happen</span>
+    <div class="body">${s.law.map(p => `<p>${p}</p>`).join('')}${branches}</div></div>`);
+
+  /* The myths stay folded away, so the stage reads as the law first. */
+  if (s.myths) parts.push(`<details class="mythwrap">
+    ${sum(`<span class="sumtext">${s.myths.length} ${s.myths.length === 1 ? 'thing' : 'things'}
+      you may be told that ${s.myths.length === 1 ? 'is' : 'are'} not true</span>`)}
+    <div class="body">${s.myths.map(m =>
+      `<div class="myth"><p class="claim">${m.claim}</p>
+       <p class="truth"><b>Not true</b>${m.truth}</p></div>`).join('')}</div></details>`);
+
+  $('stage').innerHTML = parts.join('');
+  /* 'toggle' does not bubble, so each panel gets its own listener; the iframe
+     has to be told its new height every time one opens or closes. */
+  $('stage').querySelectorAll('details').forEach(d => d.addEventListener('toggle', postHeight));
+  $('live').textContent = `Stage ${i + 1}: ${s.title}`;
+
+  [...$('rail').children].forEach((c, n) => {
+    if (n === i) c.setAttribute('aria-current', 'step'); else c.removeAttribute('aria-current');
+  });
+  postHeight();
+}
+
+function go(n) {
+  if (n < 0 || n >= STAGES.length) return;
+  i = n; render();
+  $('stage').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+$('rail').addEventListener('click', e => {
+  const b = e.target.closest('[data-go]'); if (b) go(+b.dataset.go);
+});
+addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') go(i + 1);
+  if (e.key === 'ArrowLeft') go(i - 1);
+});
+
+document.querySelectorAll('[data-exit]').forEach(b => b.addEventListener('click', () => {
+  const away = 'https://www.google.com';
+  try { if (window.top !== window.self) window.top.location.replace(away); } catch (err) {}
+  location.replace(away);
+}));
+
+function postHeight() {
+  const h = Math.ceil(document.documentElement.getBoundingClientRect().height) + 8;
+  parent.postMessage({ bhekisisaEmbed: 'height', height: h, id: location.pathname }, '*');
+}
+new ResizeObserver(postHeight).observe(document.documentElement);
+addEventListener('load', postHeight);
+load();
+</script>

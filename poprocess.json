@@ -1,0 +1,163 @@
+{
+  "_about": [
+    "The whole walkthrough: the eight stages, and the source note at the foot of",
+    "the page. This file is the one to edit for wording and numbers.",
+    "",
+    "Per stage:",
+    "  short      rail label",
+    "  sub        second line on the rail card",
+    "  icon       which figure from po-icons.json",
+    "  title      stage heading",
+    "  where      where this happens, in plain words",
+    "  law        what should happen - one string per paragraph",
+    "  branches   optional sub-outcomes, shown as small cards: {t, b}",
+    "  myths      [{claim, truth}] - things women were told that are untrue",
+    "",
+    "Paragraphs take inline HTML: <b> for emphasis, and entities such as",
+    "&nbsp; &mdash; &rsquo; &ldquo; &rdquo; for spacing and punctuation."
+  ],
+    
+  "stages": [
+    {
+      "short": "The incident",
+      "sub": "where it starts",
+      "icon": "standing",
+      "title": "After an incident of violence",
+      "where": "A police station, a court, or neither — it is her choice",
+      "law": [
+        "A survivor can do two separate things, and she is not required to do both. She can open a criminal case at a police station, and she can apply for a protection order at a magistrates&rsquo; court. One does not cancel the other, and doing one does not oblige her to do the other."
+      ],
+      "branches": [
+        {
+          "t": "At the police station",
+          "b": "A criminal case is opened. If the prosecutor decides there is enough evidence, the perpetrator is arrested and charged, and a trial follows."
+        },
+        {
+          "t": "At the magistrates&rsquo; court",
+          "b": "An application for a protection order is lodged with the clerk of the court. This is a civil process, separate from any criminal case."
+        }
+      ]
+    },
+    {
+      "short": "The application",
+      "sub": "lodge the form",
+      "icon": "writing",
+      "title": "The application is completed and lodged",
+      "where": "With the clerk of the magistrates&rsquo; court",
+      "law": [
+        "The application form is completed and lodged with the clerk of the court. <b>She must apply herself</b> — somebody else cannot do it for her — <b>but she is entitled to be assisted</b> with the paperwork.",
+        "There is no requirement to apply at a court near where the perpetrator lives."
+      ],
+      "myths": [
+        {
+          "claim": "&ldquo;You have to apply at the court where he lives.&rdquo;",
+          "truth": "You do not. At least one woman in the study was wrongly told this."
+        }
+      ]
+    },
+    {
+      "short": "Interim order",
+      "sub": "a magistrate grants it",
+      "icon": "receiving",
+      "title": "A magistrate grants an interim order",
+      "where": "The magistrates&rsquo; court, usually the same day",
+      "law": [
+        "A magistrate considers the application and grants an interim protection order. A court may decide not to grant one, but any survivor of violence who applies should be granted an order."
+      ]
+    },
+    {
+      "short": "Service",
+      "sub": "it must reach him",
+      "icon": "sending",
+      "title": "The order must be served on him",
+      "where": "By the court, the police or the sheriff",
+      "law": [
+        "<b>An interim protection order does not come into effect until it has been served</b> — that is, until the perpetrator has been informed of it in writing. Service is normally done by the court, the police or the sheriff, not by her.",
+        "Once he has been informed in writing, the order is in force. It stays in force even if he destroys the document."
+      ],
+      "myths": [
+        {
+          "claim": "&ldquo;A man awaiting trial in a correctional facility cannot be served.&rdquo;",
+          "truth": "He can. Several women described court officials telling them otherwise."
+        },
+        {
+          "claim": "&ldquo;He tore up the order, so it does not count.&rdquo;",
+          "truth": "The order takes effect once he has been informed of it in writing, and stays in force whatever he does to the paper. Some women stopped engaging with the system because they believed this — sometimes after a police member told them so."
+        },
+        {
+          "claim": "&ldquo;It will have to be served again, and you will have to pay.&rdquo;",
+          "truth": "One woman was told this by a member of the police. Serving a protection order is not something she pays for."
+        }
+      ]
+    },
+    {
+      "short": "Hearing set",
+      "sub": "a date is given",
+      "icon": "waiting",
+      "title": "A hearing date is set",
+      "where": "The magistrates&rsquo; court",
+      "law": [
+        "A hearing date must be given to anybody granted an interim protection order, so the court can consider whether to finalise it. The perpetrator has a chance to be heard.",
+        "The interim order remains in effect until that hearing decides whether to make it permanent, unless it is set aside before then.",
+        "<b>The court must confirm that the perpetrator was aware of the court date.</b> If it cannot, it must give another date."
+      ] 
+    },
+    {
+      "short": "Finalisation",
+      "sub": "the hearing",
+      "icon": "hearing",
+      "title": "The finalisation hearing",
+      "where": "The magistrates&rsquo; court",
+      "law": [
+        "The court decides whether to make the protection order permanent. What happens depends on who appears:"
+      ],
+      "branches": [
+        {
+          "t": "She appears, or tells the court she cannot",
+          "b": "If she informs the court she is unavailable and asks for another date, the hearing can be moved."
+        },
+        {
+          "t": "She does not appear",
+          "b": "The court must try to find out why. If she was prevented from attending for a valid reason, another date is given. If there is no good reason, or she does not want it finalised, the interim order ceases to have effect."
+        },
+        {
+          "t": "He appears, or asks for a postponement",
+          "b": "The hearing proceeds, or is moved to a new date."
+        },
+        {
+          "t": "He does not appear or inform the court",
+          "b": "The court must first confirm he was aware of the date. If he was, the hearing can go ahead without him."
+        }
+      ] 
+    },
+    {
+      "short": "Final order",
+      "sub": "made permanent",
+      "icon": "holding",
+      "title": "The final order is granted",
+      "where": "The magistrates&rsquo; court",
+      "law": [
+        "The magistrate grants a final protection order if convinced there is evidence of domestic abuse. If not — or if the interim order has lapsed — the interim order is no longer valid."
+      ] 
+    },
+    {
+      "short": "If he breaks it",
+      "sub": "what to do",
+      "icon": "calling",
+      "title": "If he breaches the order",
+      "where": "The police",
+      "law": [
+        "A breach of a protection order is a criminal matter. She can ask the police to arrest the perpetrator.",
+        "Three further provisions can be asked for. A <b>safety monitoring notice</b>, if she still lives with him, has the police check on her over a set period. <b>Weapons confiscation</b> can be applied for once an order is granted. <b>Emergency monetary relief</b> reimburses costs she has already carried."
+      ] 
+    }
+  ],
+  "source": {
+    "label": "Source:",
+    "citation": "Jewkes R, Ramsoomar L, Chirwa E, et al 2026 Protection orders protect many women from Intimate Partner Violence (IPV): findings from four provincial sites in South Africa SAMRC Evidence brief, Pretoria.",
+    "logo": {
+      "src": "BhekisisaDataLogo.png",
+      "alt": "Bhekisisa Data Logo"
+    }
+  }
+}

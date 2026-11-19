@@ -1,0 +1,81 @@
+{
+  "_about": [
+    "Eight female figures for the stage cards, as SVG markup fragments.",
+    "One silhouette, re-posed per stage: she is always doing something, never",
+    "cowering - this is a page about using a system, not about being a victim",
+    "of one. Single colour: everything inherits the card's `color`, so one CSS",
+    "rule switches a whole figure to the accent.",
+    "",
+    "Classes: f = filled body parts, l = limbs, o = outlined props.",
+    "",
+    "Each icon is assembled as:  <g [shift]>body + arms</g> + prop",
+    "  armsRef  names a pose in `shared` (reuse)",
+    "  arms     raw markup, when the pose is used once",
+    "  prop     what she is using, drawn at x 40-62 of the unshifted grid",
+    "  shift    false keeps the figure centred even though it has a prop",
+    "A figure with a prop is shifted left by `propShift` to make room for it.",
+    "",
+    "Attributes use single quotes so the markup stays readable inside JSON;",
+    "double quotes work too if you escape them as \\\"."
+  ],
+
+  "viewBox": "0 0 64 64",
+  "propShift": "translate(-10 0)",
+  "body": ["head", "torso", "legs"],
+
+  "shared": {
+    "head": "<circle class='f' cx='32' cy='13' r='7'/><path class='f' d='M25 13.5a7 7 0 0 1 14 0v8.5a1.5 1.5 0 0 1-3 0V15a4 4 0 0 0-8 0v7a1.5 1.5 0 0 1-3 0z'/>",
+    "torso": "<path class='f' d='M32 23c-4.6 0-7.7 2.5-8.6 6.4L20 44h24l-3.4-14.6C39.7 25.5 36.6 23 32 23z'/>",
+    "legs": "<path class='l' d='M28 44v11M36 44v11'/>",
+    "armsDown": "<path class='l' d='M25 28.5 22 39M39 28.5 42 39'/>"
+  },
+
+  "icons": {
+    "standing": {
+      "_note": "1 standing, nothing in her hands - where it starts",
+      "armsRef": "armsDown"
+    },
+
+    "writing": {
+      "_note": "2 bent over a form she is filling in",
+      "arms": "<path class='l' d='M25 28.5 22 39M39 28.5 50 33'/>",
+      "prop": "<rect class='o' x='40' y='26' width='16' height='19' rx='2'/><path class='o' d='M44 33h8M44 38h8'/>"
+    },
+
+    "receiving": {
+      "_note": "3 taking a stamped page from the court",
+      "arms": "<path class='l' d='M25 28.5 22 39M39 28.5 50 30'/>",
+      "prop": "<rect class='o' x='40' y='20' width='16' height='19' rx='2'/><circle class='f' cx='48' cy='29.5' r='3.2'/>"
+    },
+
+    "sending": {
+      "_note": "4 sending it on to him",
+      "arms": "<path class='l' d='M25 28.5 22 39M39 28.5 50 31'/>",
+      "prop": "<rect class='o' x='40' y='24' width='19' height='14' rx='2.5'/><path class='o' d='M41.5 25.5 49.5 32l8-6.5'/>"
+    },
+
+    "waiting": {
+      "_note": "5 beside a calendar - a date is given",
+      "armsRef": "armsDown",
+      "prop": "<rect class='o' x='40' y='24' width='19' height='19' rx='2.5'/><path class='o' d='M40 30h19M45.5 21.5v4M53.5 21.5v4'/><circle class='f' cx='49.5' cy='36.5' r='2.6'/>"
+    },
+
+    "hearing": {
+      "_note": "6 at the hearing",
+      "armsRef": "armsDown",
+      "prop": "<path class='o' d='M50 23v21M44 44h12M42 28h16'/><path class='o' d='M38.5 28l3.5 7h-7zM57.5 28l3.5 7h-7z'/>"
+    },
+
+    "holding": {
+      "_note": "7 holding up the order she was granted",
+      "arms": "<path class='l' d='M25 28.5 22 39M39 28.5 48 21'/>",
+      "prop": "<rect class='o' x='40' y='7' width='17' height='19' rx='2'/><path class='o' d='M44.5 16.5l3 3 6-6.5'/>"
+    },
+
+    "calling": {
+      "_note": "8 holding up the order he has broken - deliberately the same pose and the same page as 7, so the pair reads as one thing: granted, then breached. Only the mark on the page changes, tick to cross. The key is still 'calling' so poprocess.json needs no edit; rename it in both files if you prefer.",
+      "arms": "<path class='l' d='M25 28.5 22 39M39 28.5 48 21'/>",
+      "prop": "<rect class='o' x='40' y='7' width='17' height='19' rx='2'/><path class='o' d='M44.5 12.5l8 8M52.5 12.5l-8 8'/>"
+    }
+  }
+}
