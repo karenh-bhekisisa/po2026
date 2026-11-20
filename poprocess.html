@@ -63,7 +63,7 @@
         Eight square cards: four across on a wide screen (two rows of four), two
         across on a phone (four rows of two). Fixed column counts rather than
         auto-fit, because eight items at three columns leaves a ragged last row. */
-        .rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 22px}
+        .rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 14px}
         .chip{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
         aspect-ratio:1/1;text-align:center;cursor:pointer;font:inherit;
         background:transparent;color:var(--ink);border:1.5px solid var(--axis);
@@ -101,24 +101,31 @@
         h3{font-size:1.25rem;line-height:1.25;margin:0 0 .5em;letter-spacing:-.01em}
         .where{font-size:.8rem;color:var(--ink-muted);margin:0 0 1em;
         border-bottom:1px solid var(--rule);padding-bottom:.8em}
-        /* "What should happen" is plain markup, always on screen. The myths are a
-        native <details>, so they are keyboard accessible and still open if the
-        script fails. */
-        .block{border-left:4px solid var(--rule);padding:0 0 0 14px;margin:0 0 12px}
-        .block.law{border-color:var(--accent)}
+        /* The action line: one sentence on what needs to happen, sitting between
+        the heading and the "Where". With the law folded away by default this is
+        what a reader sees first, so it has to stand on its own. */
+        .action{font-size:1.02rem;color:var(--ink-2);line-height:1.4;margin:0 0 .6em}
+
+        /* Both the law and the myths are native <details>: keyboard accessible,
+        and still readable if the script fails. Neither carries the open
+        attribute, and render() rebuilds the stage each time, so both start
+        closed on every stage. */
         summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;
         padding:5px 0;border-radius:4px}
         summary::-webkit-details-marker{display:none}
-        summary:hover .lbl,summary:hover .sumtext{color:var(--ink)}
-        .lbl{flex:1;font-size:.72rem;font-weight:700;letter-spacing:.06em;
-        text-transform:uppercase}
-        .block.law .lbl{color:var(--accent);display:block;padding:5px 0}
+        summary:hover .sumtext{color:var(--ink)}
         .chev{flex:none;width:17px;height:17px;stroke:var(--ink-muted);fill:none;
         stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .18s}
         details[open] > summary .chev{transform:rotate(180deg)}
-        .block .body{padding:4px 0 10px}
-        .block p{margin:0 0 .6em;font-size:.97rem}
-        .block p:last-child{margin:0}
+
+        /* --- what should happen -------------------------------------------------- */
+        .lawwrap{border:1px solid var(--rule);border-left:4px solid var(--accent);
+        border-radius:8px;padding:2px 14px;margin:0 0 10px}
+        .lawwrap > summary{padding:10px 0}
+        .lawwrap .sumtext{flex:1;font-size:.92rem;font-weight:600;color:var(--accent)}
+        .lawwrap .body{padding:0 0 10px}
+        .lawwrap p{margin:0 0 .6em;font-size:.97rem}
+        .lawwrap p:last-child{margin:0}
 
         /* --- branch cards -------------------------------------------------------- */
         .branches{display:grid;gap:8px;margin:.2em 0 .6em}
@@ -138,6 +145,59 @@
         .myth .truth{margin:0;font-size:.93rem}
         .myth .truth b{color:var(--flag);text-transform:uppercase;font-size:.72rem;
         letter-spacing:.05em;margin-right:.4em;font-weight:700}
+
+
+        /* --- controls (Back / Next / Start again + pips) -------------------------
+        Lifted from ponumbers.html so the two interactives steer identically: the
+        rail is still there for jumping about, these move one stage at a time. */
+        .controls{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            flex-wrap:wrap;
+            margin-top:4px;
+            border-top:1px solid var(--rule);
+            padding-top:14px
+        }
+        .nav{
+            font:inherit;
+            font-size:.92rem;
+            font-weight:600;
+            cursor:pointer;
+            border-radius:999px;
+            padding:9px 18px;
+            border:1.5px solid var(--axis);
+            background:transparent;color:var(--ink)
+        }
+        .nav:hover:not(:disabled){
+            border-color:var(--ink-2)
+        }
+        .nav.primary{
+            background:var(--accent);
+            border-color:var(--accent);
+            color:#fff
+        }
+        .nav:disabled{
+            opacity:.4;
+            cursor:default
+        }
+        .pips{
+            display:flex;
+            gap:6px;
+            margin-left:auto
+        }
+        .pip{
+            width:7px;
+            height:7px;
+            border-radius:50%;
+            background:var(--axis);
+            transition:background .2s
+        }
+        .pip.on{
+            background:var(--accent)
+        }
+
+        @media (prefers-reduced-motion:reduce){.pip{transition:none}}
 
         @media (prefers-reduced-motion:reduce){.chev{transition:none}}
         .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
@@ -172,6 +232,13 @@
             <h2 id="h-w">The process</h2>
 
             <div class="rail" id="rail" role="tablist" aria-label="Stages"></div>
+
+            <div class="controls">
+                <button class="nav" type="button" id="back" disabled>Back</button>
+                <button class="nav primary" type="button" id="next">Next</button>
+                <button class="nav" type="button" id="btn-restart" disabled>Start again</button>
+                <div class="pips" id="pips" aria-hidden="true"></div>
+            </div>
 
             <div id="stage"></div>
             <p class="sr" id="live" aria-live="polite"></p>
@@ -263,10 +330,13 @@ async function load() {
       could not load its content. If you need help now, the GBV Command Centre
       is on <b>0800 428 428</b>, free, 24 hours.</p>
       <p class="small">${String(err.message || err)}</p>`;
+    $('next').disabled = $('back').disabled = $('btn-restart').disabled = true;
     postHeight();
     return;
   }
   buildRail();
+  buildPips();
+  wireControls();
   buildSource(SOURCE);
   /* $('src').innerHTML = SOURCE;*/
   render();
@@ -287,6 +357,12 @@ function buildRail() {
   }).join('');
 }
 
+/* One dot per stage, filled in up to the stage being read. */
+function buildPips() {
+  $('pips').innerHTML =
+    STAGES.map((_, n) => `<span class="pip" data-pip="${n}"></span>`).join('');
+}
+
 function render() {
   const s = STAGES[i];
   const parts = [];
@@ -295,15 +371,17 @@ function render() {
 
   parts.push(`<div class="stagehead"><span class="stagenum">Stage ${i + 1} of ${STAGES.length}</span></div>`);
   parts.push(`<h3>${s.title}</h3>`);
+  /* What needs to happen, in one line, before anything has to be opened. */
+  if (s.action) parts.push(`<p class="action">${s.action}</p>`);
   parts.push(`<p class="where">Where: ${s.where}</p>`);
 
-  /* The law, always on screen: a reader mid-process should not have to open
-     anything to find out what is supposed to happen. */
+  /* The law, folded away: the action line above carries the gist, and this is
+     the detail for a reader who wants it. Closed on every stage, every time. */
   const branches = s.branches ? `<div class="branches">${s.branches.map(b =>
     `<div class="branch"><b>${b.t}</b><span>${b.b}</span></div>`).join('')}</div>` : '';
-  if (s.law) parts.push(`<div class="block law">
-    <span class="lbl">What should happen</span>
-    <div class="body">${s.law.map(p => `<p>${p}</p>`).join('')}${branches}</div></div>`);
+  if (s.law) parts.push(`<details class="lawwrap">
+    ${sum('<span class="sumtext">What should happen</span>')}
+    <div class="body">${s.law.map(p => `<p>${p}</p>`).join('')}${branches}</div></details>`);
 
   /* The myths stay folded away, so the stage reads as the law first. */
   if (s.myths) parts.push(`<details class="mythwrap">
@@ -322,6 +400,19 @@ function render() {
   [...$('rail').children].forEach((c, n) => {
     if (n === i) c.setAttribute('aria-current', 'step'); else c.removeAttribute('aria-current');
   });
+
+  /* Back and Start again are dead on stage one; Next is dead on the last. The
+     label walks Start -> Next -> Finish, so an untouched walkthrough invites a
+     first click rather than looking like it is already part-read. */
+  $('back').disabled = i === 0;
+  $('btn-restart').disabled = i === 0;
+  $('next').disabled = i === STAGES.length - 1;
+  $('next').textContent =
+      i === 0 ? 'Start'
+    : i === STAGES.length - 2 ? 'Finish'
+    : 'Next';
+  [...$('pips').children].forEach((p, n) => p.classList.toggle('on', n <= i));
+
   postHeight();
 }
 
@@ -330,6 +421,20 @@ function go(n) {
   i = n; render();
   $('stage').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
+
+/* Relative move, so Back and Next need no knowledge of where they are. */
+const step = d => go(i + d);
+
+function wireControls() {
+  $('next').addEventListener('click', () => step(1));
+  $('back').addEventListener('click', () => step(-1));
+  $('btn-restart').addEventListener('click', () => {
+    i = 0; render();
+    const top = document.querySelector('h1, h2');
+    if (top) top.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
 $('rail').addEventListener('click', e => {
   const b = e.target.closest('[data-go]'); if (b) go(+b.dataset.go);
 });

@@ -8,6 +8,7 @@
     "  sub        second line on the rail card",
     "  icon       which figure from po-icons.json",
     "  title      stage heading",
+    "  action     one line on what needs to happen, under the heading",
     "  where      where this happens, in plain words",
     "  law        what should happen - one string per paragraph",
     "  branches   optional sub-outcomes, shown as small cards: {t, b}",
@@ -16,13 +17,13 @@
     "Paragraphs take inline HTML: <b> for emphasis, and entities such as",
     "&nbsp; &mdash; &rsquo; &ldquo; &rdquo; for spacing and punctuation."
   ],
-    
   "stages": [
     {
       "short": "The incident",
       "sub": "where it starts",
       "icon": "standing",
       "title": "After an incident of violence",
+      "action": "Decide what to do next: open a criminal case, apply for a protection order, or both.",
       "where": "A police station, a court, or neither — it is her choice",
       "law": [
         "A survivor can do two separate things, and she is not required to do both. She can open a criminal case at a police station, and she can apply for a protection order at a magistrates&rsquo; court. One does not cancel the other, and doing one does not oblige her to do the other."
@@ -43,6 +44,7 @@
       "sub": "lodge the form",
       "icon": "writing",
       "title": "The application is completed and lodged",
+      "action": "Fill in the application form and lodge it with the clerk yourself &mdash; with help if you need it.",
       "where": "With the clerk of the magistrates&rsquo; court",
       "law": [
         "The application form is completed and lodged with the clerk of the court. <b>She must apply herself</b> — somebody else cannot do it for her — <b>but she is entitled to be assisted</b> with the paperwork.",
@@ -60,6 +62,7 @@
       "sub": "a magistrate grants it",
       "icon": "receiving",
       "title": "A magistrate grants an interim order",
+      "action": "A magistrate reads the application and grants an interim order, usually the same day.",
       "where": "The magistrates&rsquo; court, usually the same day",
       "law": [
         "A magistrate considers the application and grants an interim protection order. A court may decide not to grant one, but any survivor of violence who applies should be granted an order."
@@ -70,6 +73,7 @@
       "sub": "it must reach him",
       "icon": "sending",
       "title": "The order must be served on him",
+      "action": "The order must be given to him in writing. Until that happens, it is not yet in force.",
       "where": "By the court, the police or the sheriff",
       "law": [
         "<b>An interim protection order does not come into effect until it has been served</b> — that is, until the perpetrator has been informed of it in writing. Service is normally done by the court, the police or the sheriff, not by her.",
@@ -95,18 +99,20 @@
       "sub": "a date is given",
       "icon": "waiting",
       "title": "A hearing date is set",
+      "action": "The court sets a date to decide whether the interim order becomes permanent.",
       "where": "The magistrates&rsquo; court",
       "law": [
         "A hearing date must be given to anybody granted an interim protection order, so the court can consider whether to finalise it. The perpetrator has a chance to be heard.",
         "The interim order remains in effect until that hearing decides whether to make it permanent, unless it is set aside before then.",
         "<b>The court must confirm that the perpetrator was aware of the court date.</b> If it cannot, it must give another date."
-      ] 
+      ]
     },
     {
       "short": "Finalisation",
       "sub": "the hearing",
       "icon": "hearing",
       "title": "The finalisation hearing",
+      "action": "Go to the hearing, or tell the court beforehand if you cannot be there.",
       "where": "The magistrates&rsquo; court",
       "law": [
         "The court decides whether to make the protection order permanent. What happens depends on who appears:"
@@ -128,28 +134,30 @@
           "t": "He does not appear or inform the court",
           "b": "The court must first confirm he was aware of the date. If he was, the hearing can go ahead without him."
         }
-      ] 
+      ]
     },
     {
       "short": "Final order",
       "sub": "made permanent",
       "icon": "holding",
       "title": "The final order is granted",
+      "action": "The magistrate makes the order permanent if satisfied there is evidence of abuse.",
       "where": "The magistrates&rsquo; court",
       "law": [
         "The magistrate grants a final protection order if convinced there is evidence of domestic abuse. If not — or if the interim order has lapsed — the interim order is no longer valid."
-      ] 
+      ]
     },
     {
       "short": "If he breaks it",
       "sub": "what to do",
       "icon": "calling",
       "title": "If he breaches the order",
+      "action": "Report the breach to the police and ask them to arrest him.",
       "where": "The police",
       "law": [
         "A breach of a protection order is a criminal matter. She can ask the police to arrest the perpetrator.",
         "Three further provisions can be asked for. A <b>safety monitoring notice</b>, if she still lives with him, has the police check on her over a set period. <b>Weapons confiscation</b> can be applied for once an order is granted. <b>Emergency monetary relief</b> reimburses costs she has already carried."
-      ] 
+      ]
     }
   ],
   "source": {
