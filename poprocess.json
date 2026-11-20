@@ -24,7 +24,7 @@
       "icon": "standing",
       "title": "After an incident of violence",
       "action": "Decide what to do next: open a criminal case, apply for a protection order, or both.",
-      "where": "A police station, or a court",
+      "where": "A police station or a court.",
       "law": [
         "A survivor can do two separate things, and she is not required to do both. She can open a criminal case at a police station, and she can apply for a protection order at a magistrates&rsquo; court. One does not cancel the other, and doing one does not oblige her to do the other."
       ],
@@ -45,7 +45,7 @@
       "icon": "writing",
       "title": "The application is completed and lodged",
       "action": "Fill in the application form and lodge it with the clerk yourself.",
-      "where": "With the clerk of the magistrates&rsquo; court",
+      "where": "With the clerk of the magistrates&rsquo; court.",
       "law": [
         "The application form is completed and lodged with the clerk of the court. <b>The survivor must apply herself</b> — somebody else cannot do it for her — <b>but she is entitled to be assisted</b> with the paperwork.",
         "There is no requirement to apply at a court near where the perpetrator lives."
@@ -62,8 +62,8 @@
       "sub": "a magistrate grants it",
       "icon": "receiving",
       "title": "A magistrate grants an interim order",
-      "action": "A magistrate reads the application and grants an interim order, usually the same day.",
-      "where": "The magistrates&rsquo; court, usually the same day",
+      "action": "A magistrate reads the application and grants an interim order.",
+      "where": "The magistrates&rsquo; court, usually the same day.",
       "law": [
         "A magistrate considers the application and grants an interim protection order. A court may decide not to grant one, but any survivor of violence who applies should be granted an order."
       ]
@@ -74,7 +74,7 @@
       "icon": "sending",
       "title": "The order must be served on him",
       "action": "The order must be given to him in writing. Until that happens, it is not yet in force.",
-      "where": "By the court, the police or the sheriff",
+      "where": "By the court or the police.",
       "law": [
         "<b>An interim protection order does not come into effect until it has been served</b> — that is, until the perpetrator has been informed of it in writing. Service is normally done by the court or the police, not by the survivor.",
         "Once the perpetrator has been informed in writing, the order is in force. It stays in force for 8 weeks, even if he destroys the document."
@@ -100,7 +100,7 @@
       "icon": "waiting",
       "title": "A hearing date is set",
       "action": "The court sets a date to decide whether the interim order becomes permanent.",
-      "where": "The magistrates&rsquo; court",
+      "where": "The magistrates&rsquo; court.",
       "law": [
         "A hearing date must be given to anybody granted an interim protection order, so the court can consider whether to finalise it. The perpetrator has a chance to be heard.",
         "The interim order remains in effect until that hearing decides whether to make it permanent, unless it is set aside before then.",
@@ -113,7 +113,7 @@
       "icon": "hearing",
       "title": "The finalisation hearing",
       "action": "Go to the hearing, or tell the court beforehand if you cannot be there.",
-      "where": "The magistrates&rsquo; court",
+      "where": "The magistrates&rsquo; court.",
       "law": [
         "The court decides whether to make the protection order permanent. What happens depends on who appears:"
       ],
@@ -142,7 +142,7 @@
       "icon": "holding",
       "title": "The final order is granted",
       "action": "The magistrate makes the order permanent if satisfied there is evidence of abuse.",
-      "where": "The magistrates&rsquo; court",
+      "where": "The magistrates&rsquo; court.",
       "law": [
         "The magistrate grants a final protection order if convinced there is evidence of domestic abuse. If not — or if the interim order has lapsed — the interim order is no longer valid."
       ]
@@ -153,7 +153,7 @@
       "icon": "calling",
       "title": "If he breaches the order",
       "action": "Report the breach to the police and ask them to arrest him.",
-      "where": "The police",
+      "where": "The police.",
       "law": [
         "A breach of a protection order is a criminal matter. She can ask the police to arrest the perpetrator.",
         "Three further provisions can be asked for. A <b>safety monitoring notice</b>, if she still lives with him, has the police check on her over a set period. <b>Weapons confiscation</b> can be applied for once an order is granted. <b>Emergency monetary relief</b> reimburses costs she has already carried."
