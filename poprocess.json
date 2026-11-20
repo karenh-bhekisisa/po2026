@@ -24,7 +24,7 @@
       "icon": "standing",
       "title": "After an incident of violence",
       "action": "Decide what to do next: open a criminal case, apply for a protection order, or both.",
-      "where": "A police station, a court, or neither — it is her choice",
+      "where": "A police station, or a court",
       "law": [
         "A survivor can do two separate things, and she is not required to do both. She can open a criminal case at a police station, and she can apply for a protection order at a magistrates&rsquo; court. One does not cancel the other, and doing one does not oblige her to do the other."
       ],
@@ -44,16 +44,16 @@
       "sub": "lodge the form",
       "icon": "writing",
       "title": "The application is completed and lodged",
-      "action": "Fill in the application form and lodge it with the clerk yourself &mdash; with help if you need it.",
+      "action": "Fill in the application form and lodge it with the clerk yourself.",
       "where": "With the clerk of the magistrates&rsquo; court",
       "law": [
-        "The application form is completed and lodged with the clerk of the court. <b>She must apply herself</b> — somebody else cannot do it for her — <b>but she is entitled to be assisted</b> with the paperwork.",
+        "The application form is completed and lodged with the clerk of the court. <b>The survivor must apply herself</b> — somebody else cannot do it for her — <b>but she is entitled to be assisted</b> with the paperwork.",
         "There is no requirement to apply at a court near where the perpetrator lives."
       ],
       "myths": [
         {
           "claim": "&ldquo;You have to apply at the court where he lives.&rdquo;",
-          "truth": "You do not. At least one woman in the study was wrongly told this."
+          "truth": "You do not. In the study, at least one woman was wrongly informed about this."
         }
       ]
     },
@@ -76,8 +76,8 @@
       "action": "The order must be given to him in writing. Until that happens, it is not yet in force.",
       "where": "By the court, the police or the sheriff",
       "law": [
-        "<b>An interim protection order does not come into effect until it has been served</b> — that is, until the perpetrator has been informed of it in writing. Service is normally done by the court, the police or the sheriff, not by her.",
-        "Once he has been informed in writing, the order is in force. It stays in force even if he destroys the document."
+        "<b>An interim protection order does not come into effect until it has been served</b> — that is, until the perpetrator has been informed of it in writing. Service is normally done by the court or the police, not by the survivor.",
+        "Once the perpetrator has been informed in writing, the order is in force. It stays in force for 8 weeks, even if he destroys the document."
       ],
       "myths": [
         {
