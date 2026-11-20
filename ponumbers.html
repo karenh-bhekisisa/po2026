@@ -17,7 +17,7 @@
         --ink-muted:#898781; --rule:#e1e0d9; --axis:#c3c2b7;
         --accent:#2a78d6;
         --o-stopped:#2a78d6; --o-reduced:#1baf7a; --o-worse:#e34948;
-        --dot-live:#2a78d6; --dot-gone:#d8d7d0;
+        --dot-live:#2a78d6; --dot-strong:#11467f; --dot-final:#1baf7a; --dot-gone:#d8d7d0;
         --radius:10px;
         --font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
         }
@@ -26,7 +26,7 @@
         body{
             background:var(--vizi-bg);
             color:var(--ink);
-            font-family:var(--font);
+            font-family: 'Source Sans 3', 'Open Sans', 'Source Sans Pro', sans-serif;
             font-size:17px;
             line-height:1.5;
             -webkit-text-size-adjust:100%;
@@ -67,34 +67,37 @@
         .count{
             display:flex;
             align-items:baseline;
-            gap:10px;
+            gap:9px;
             flex-wrap:wrap;
-            margin:0 0 2px
+            margin:12px 0 0
         }
         .count .n{
-            font-size:3.2rem;
+            font-size:2.5rem;
             line-height:1;
             font-weight:800;
             letter-spacing:-.035em;
             color:var(--accent);
             font-variant-numeric:tabular-nums
         }
-        .count .of{
-            font-size:.95rem;
-            color:var(--ink-2);
-            flex:1 1 140px;
-            min-width:0
+        .count .of{                 /* same type as the step heading, in blue */
+            font-size:1.25rem;
+            font-weight:700;
+            letter-spacing:-.01em;
+            color:var(--accent);
+            flex:1 1 150px;
+            min-width:0;
+            line-height:1.25
         }
 
         /* --- the grid ------------------------------------------------------------ */
         .gridwrap{
-            margin:10px 0 4px
+            margin:2px 0 0
         }
         svg{
             display:block;
             width:100%;
             height:auto;
-            max-width:420px;
+            max-width:400px;
             margin:0 auto
         }
         circle{
@@ -105,6 +108,12 @@
         }
         .d-live{
             fill:var(--dot-live);stroke:none
+        }
+        .d-strong{
+            fill:var(--dot-strong);stroke:none
+        }
+        .d-final{
+            fill:var(--dot-final);stroke:none
         }
         .d-stopped{
             fill:var(--o-stopped);stroke:none
@@ -121,27 +130,31 @@
 
         /* --- legend -------------------------------------------------------------- */
         #legend[hidden]{display:none}
-        #legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin:12px 0 2px;font-size:.84rem}
+        #legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin:2px 0 10px;font-size:.86rem}
         .key{display:inline-flex;align-items:center;gap:7px;color:var(--ink-2)}
         .kd{width:14px;height:14px;border-radius:50%;flex:none}
         .kd.hollow{background:none;border:3px solid var(--ink-muted)}
+        .kd.live{background:var(--dot-live)}
+        .kd.strong{background:var(--dot-strong)}
+        .kd.final{background:var(--dot-final)}
         .key b{color:var(--ink);font-variant-numeric:tabular-nums}
 
         /* --- step text ----------------------------------------------------------- */
-        .step h3{font-size:1.2rem;line-height:1.25;margin:14px 0 .35em;letter-spacing:-.01em}
-        .step p{color:var(--ink-2);font-size:1rem}
+        .step h3{font-size:1.25rem;line-height:1.25;margin:12px 0 .35em;letter-spacing:-.01em}
+        .step p{color:var(--ink-2);font-size:1rem;margin:0}
 
         .controls{
             display:flex;
             align-items:center;
             gap:10px;
-            margin-top:16px;
-            border-top:1px solid var(--rule);
-            padding-top:14px
+            flex-wrap:wrap;
+            margin:10px 0 0;
+            border-bottom:1px solid var(--rule);
+            padding-bottom:14px
         }
         
         .nav{
-            /*font:inherit;*/
+            font:inherit;
             font-size:.92rem;
             font-weight:600;
             cursor:pointer;
@@ -183,7 +196,7 @@
             display:flex;
             gap:8px;
             flex-wrap:wrap;
-            margin-top:12px
+            margin-top:10px
         }
         
         .btn{
@@ -218,6 +231,10 @@
         th{
             color:var(--ink-muted);
             font-weight:600
+        }
+        @media (max-width:420px){
+            body{font-size:16px}
+            .step h3,.count .of{font-size:1.1rem}
         }
         .sr{
             position:absolute;
@@ -255,22 +272,23 @@
         <section class="panel" aria-labelledby="h-g">
             <h2 id="h-g"></h2>
 
-            <div class="count">
-                <span class="n" id="count"></span>
-                <span class="of" id="of"></span>
-            </div>
-             
-
             <div class="gridwrap">
                 <svg id="grid" viewBox="0 0 400 400" role="img" aria-labelledby="grid-alt"></svg>
                 <p class="sr" id="grid-alt"></p>
             </div>
-            
+
+            <div id="legend" hidden></div>
+
             <div class="controls">
                 <button class="nav" type="button" id="back" disabled>Back</button>
                 <button class="nav primary" type="button" id="next">Next</button>
                 <button class="nav" type="button" id="btn-restart" disabled>Start again</button>
                 <div class="pips" id="pips" aria-hidden="true"></div>
+            </div>
+
+            <div class="count">
+                <span class="n" id="count"></span>
+                <span class="of" id="of"></span>
             </div>
 
             <div class="step">
@@ -374,10 +392,12 @@ function buildGrid() {
   const rows = Math.ceil(total / cols);
   const step_ = 40, pad = 20, r = 14;
 
+  /* dot 0 is bottom-left: the grid fills from the bottom up, so the live
+     (blue) dots sit at the bottom and the grey ones fall away at the top. */
   let svg = '';
   for (let i = 0; i < total; i++) {
     const cx = pad + (i % cols) * step_;
-    const cy = pad + Math.floor(i / cols) * step_;
+    const cy = pad + (rows - 1 - Math.floor(i / cols)) * step_;
     svg += `<circle id="d${i}" cx="${cx}" cy="${cy}" r="${r}" class="d-live"/>`;
   }
   const grid = $('grid');
@@ -415,11 +435,14 @@ function render() {
   const s = STEPS[step];
   if (!s) return;
 
+  const bands = bandsFor(s);
   for (let i = 0; i < dots.length; i++) {
-    const live = i < s.remaining;
-    dots[i].setAttribute('class', live ? 'd-live' : 'd-gone');
-    dots[i].setAttribute('r', live ? 14 : 7);
+    const band = bands.find(b => i < b.upTo);
+    const cls  = band ? band.class : 'd-gone';
+    dots[i].setAttribute('class', cls);
+    dots[i].setAttribute('r', cls === 'd-gone' ? 7 : 14);
   }
+  buildLegend(s.legend);
 
   $('count').textContent = s.n;
   $('of').innerHTML = s.of;
@@ -434,6 +457,34 @@ function render() {
   $('next').textContent = step === STEPS.length - 2 ? 'Finish' : 'Next';
   [...$('pips').children].forEach((p, i) => p.classList.toggle('on', i <= step));
   postHeight();
+}
+
+/* How a step colours its dots, innermost group first.
+   - `bands`  : [{ upTo, class }, ...] in ascending order — full control,
+                used by the last step to show three groups at once.
+   - `held`   : shorthand for two groups — `remaining` deep, the rest up to
+                `held` still blue, so a sub-group can advance without the
+                others falling away.
+   - neither  : `remaining` blue, the rest grey. The original behaviour. */
+function bandsFor(s) {
+  if (Array.isArray(s.bands) && s.bands.length) return s.bands;
+  const held = Math.max(s.held || 0, s.remaining);
+  return held > s.remaining
+    ? [{ upTo: s.remaining, class: 'd-strong' }, { upTo: held, class: 'd-live' }]
+    : [{ upTo: s.remaining, class: 'd-live' }];
+}
+
+function buildLegend(keys) {
+  const box = $('legend');
+  if (!keys || !keys.length) { box.hidden = true; box.innerHTML = ''; return; }
+  box.innerHTML = keys.map(k => {
+    const swatch = k.class === 'd-strong' ? 'strong'
+                 : k.class === 'd-final'  ? 'final'
+                 : k.class === 'd-gone'   ? 'gone' : 'live';
+    return `<span class="key"><span class="kd ${swatch}"></span>`
+         + (k.n ? `<b>${k.n}</b> ` : '') + (k.label || '') + '</span>';
+  }).join('');
+  box.hidden = false;
 }
 
 const stripTags = html => {

@@ -98,6 +98,8 @@
         .stagehead{display:flex;align-items:baseline;gap:10px;margin:6px 0 2px}
         .stagenum{font-size:.75rem;font-weight:700;letter-spacing:.08em;color:var(--ink-muted);
         text-transform:uppercase;white-space:nowrap}
+        /* the same marker, riding on the panel heading */
+        h2 .stagenum{color:var(--accent)}
         h3{font-size:1.25rem;line-height:1.25;margin:0 0 .5em;letter-spacing:-.01em}
         .where{font-size:.8rem;color:var(--ink-muted);margin:0 0 1em;
         border-bottom:1px solid var(--rule);padding-bottom:.8em}
@@ -155,9 +157,9 @@
             align-items:center;
             gap:10px;
             flex-wrap:wrap;
-            margin-top:4px;
-            border-top:1px solid var(--rule);
-            padding-top:14px
+            margin:10px 0 0;
+            border-bottom:1px solid var(--rule);
+            padding-bottom:14px
         }
         .nav{
             font:inherit;
@@ -229,7 +231,7 @@
     <div class="wrap">
 
         <section class="panel" aria-labelledby="h-w">
-            <h2 id="h-w">The process</h2>
+            <h2 id="h-w">How to obtain a protection order</h2>
 
             <div class="rail" id="rail" role="tablist" aria-label="Stages"></div>
 
@@ -273,6 +275,8 @@ const num = n => n.toLocaleString('en-ZA').replace(/[, ]/g, ' ');
 
 /* Filled in by load(); see po-stages.json and po-icons.json for the shapes. */
 let STAGES = [], SOURCE = '', ICONS = {};
+/* The panel heading as authored; render() re-prints it with the stage count. */
+const HEADING = $('h-w').textContent.trim();
 const FALLBACK_VIEWBOX = '0 0 64 64';
 let i = 0;
 
@@ -369,10 +373,12 @@ function render() {
   const CHEV = '<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
   const sum = (inner) => `<summary>${inner}${CHEV}</summary>`;
 
-  parts.push(`<div class="stagehead"><span class="stagenum">Stage ${i + 1} of ${STAGES.length}</span></div>`);
-  parts.push(`<h3>${s.title}</h3>`);
+  $('h-w').innerHTML =
+    `${HEADING} &mdash; <span class="stagenum">Stage ${i + 1} of ${STAGES.length}</span>`;
+
+  parts.push(`<br/><h3>${s.title}</h3>`);
   /* What needs to happen, in one line, before anything has to be opened. */
-  if (s.action) parts.push(`<p class="action">${s.action}</p>`);
+  if (s.action) parts.push(`<p class="action">What to do: ${s.action}</p>`);
   parts.push(`<p class="where">Where: ${s.where}</p>`);
 
   /* The law, folded away: the action line above carries the gist, and this is
