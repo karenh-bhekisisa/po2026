@@ -266,8 +266,8 @@
    work too, as long as they are same-origin or CORS-enabled.
    =========================================================================== */
 const DATA = {
-  stages: 'poprocess.json',
-  icons:  'poicons.json'
+  stages: './poprocess.json',
+  icons:  './poicons.json'
 };
 
 const $ = id => document.getElementById(id);
@@ -373,20 +373,24 @@ function render() {
   const CHEV = '<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
   const sum = (inner) => `<summary>${inner}${CHEV}</summary>`;
 
+  let actionTitle = s.actiontitle || 'What to do';
+
   $('h-w').innerHTML =
     `${HEADING} &mdash; <span class="stagenum">Stage ${i + 1} of ${STAGES.length}</span>`;
 
   parts.push(`<br/><h3>${s.title}</h3>`);
   /* What needs to happen, in one line, before anything has to be opened. */
-  if (s.action) parts.push(`<p class="action">What to do: ${s.action}</p>`);
-  parts.push(`<p class="where">Where: ${s.where}</p>`);
+  if (s.action) 
+    parts.push(`<p class="action">${actionTitle}: ${s.action}</p>`);
+  if (s.where) 
+    parts.push(`<p class="where">Where: ${s.where}</p>`);
 
   /* The law, folded away: the action line above carries the gist, and this is
      the detail for a reader who wants it. Closed on every stage, every time. */
   const branches = s.branches ? `<div class="branches">${s.branches.map(b =>
     `<div class="branch"><b>${b.t}</b><span>${b.b}</span></div>`).join('')}</div>` : '';
   if (s.law) parts.push(`<details class="lawwrap">
-    ${sum('<span class="sumtext">What should happen</span>')}
+    ${sum('<span class="sumtext">What the law says</span>')}
     <div class="body">${s.law.map(p => `<p>${p}</p>`).join('')}${branches}</div></details>`);
 
   /* The myths stay folded away, so the stage reads as the law first. */
@@ -414,8 +418,8 @@ function render() {
   $('btn-restart').disabled = i === 0;
   $('next').disabled = i === STAGES.length - 1;
   $('next').textContent =
-      i === 0 ? 'Start'
-    : i === STAGES.length - 2 ? 'Finish'
+      i === 0 ? 'Next'
+    : i === STAGES.length - 2 ? 'Next'
     : 'Next';
   [...$('pips').children].forEach((p, n) => p.classList.toggle('on', n <= i));
 

@@ -17,38 +17,38 @@
     {
       "remaining": 100,
       "n": "100",
-      "of": "Women, all eligible for a protection order",
-      "head": "Every one of these women could have applied",
-      "body": "The women interviewed were aged 18 to 45 and living in Tshwane, eThekwini, the Waterberg and the Cape Winelands. All had been beaten, strangled, raped, threatened with a weapon or stalked by a partner in the past year, so all of them qualified for a protection order. Each dot stands for about 97 women."
+      "of": "women",
+      "head": "Every one of these women had grounds to apply for a protection order",
+      "body": "All had been beaten, strangled, raped, threatened with a weapon or stalked by a partner in the past year."
     },
     {
       "remaining": 23,
       "n": "23",
-      "of": "Tried to apply for a protection order",
-      "head": "77 Never tried",
-      "body": "Only 22,5% (2 181 of the 9 674) ever tried to apply. The researchers note this share may not hold for the country as a whole, but it points one way: most women who could benefit from a protection order never start the process."
+      "of": "applied for a protection order",
+      "head": "77 did not",
+      "body": "Only about a fifth of women who could have applied actually did. The researchers say that although this share may not hold for the country as a whole, it points one way: most women who may benefit from a protection order never start the process."
     }, 
     {
       "remaining": 21,
       "n": "21",
-      "of": "Women got an application in",
-      "head": "2 Never completed the form",
-      "body": "Some were talked out of it by police members or court officials. Others were handed forms with no help to fill them in &mdash; and the forms must be completed in English. Some took the papers home, where their partner found them and tore them up."
+      "of": "women submitted the application",
+      "head": "2 who started the process did not complete the form",
+      "body": "The research found that some women were talked out of lodging an application by police officers or court officials. Others did not have any help in filling in the form &mdash; which must be in English. Some took the papers home, where their partner found them and tore them up."
     },
     {
       "remaining": 19,
       "n": "19",
-      "of": "Women had a protection order granted, valid for 8 weeks",
-      "head": "2 Women were not granted the order",
-      "body": "Nine out of ten women who applied (89,8%) were granted an interim order. The sticking point came next: an order does not take effect until the man has been informed of it. Some could not be found, some had left the area, and some were in custody, where officials sometimes wrongly said they could not be served."
+      "of": "women were granted a temporary protection order",
+      "head": "2 women's applications were not successful",
+      "body": "A protection order comes into effect only once the man &mdash; called the respondent &mdash; has had it handed to him. Some men could not be found, some had left the area, and some were already in custody for another offence, where officials sometimes wrongly said they could not be served."
     },
     {
       "remaining": 12,
       "held": 19,
       "n": "12",
-      "of": "Women continued with the process to finalise the protection order",
-      "head": "7 Women decided no to finalise their protection order",
-      "body": "Two out of every three women with an interim order applied to finalise it. Among those who did not, the most common reason was that he or his family begged her not to go through with it, promising he would change. Just as many feared that finalising it would make the violence worse. The other seven were not left unprotected: their interim order still stood for its eight weeks.",
+      "of": "women went on to make the temporary protection order permanent",
+      "head": "7 women decided no to go ahead",
+      "body": "The most common reason why women decided not to go ahead with making the order permanent was that family &mdash; either hers or his &mdash; begged her not to go through with it, apologising and promising that he would change. Others feared that getting a permanent order would make the violence worse. However, even with a temporary order, women were protected for several weeks.",
       "legend": [
         { "class": "d-live",   "n": "7",  "label": "kept the interim order only" },
         { "class": "d-strong", "n": "12", "label": "applied to finalise" }
@@ -62,11 +62,11 @@
         { "upTo": 19, "class": "d-live"   }
       ],
       "n": "11",
-      "of": "was granted a finalised protection order, with no expiry date",
-      "head": "1 Woman was not granted a finalised protection order",
-      "body": "When women did apply to finalise, 92,3% were granted a final order. Of the 100 we started with, 11 arrive here (1 083 women out of 9 674). But the count of women the system reached is 19: every one of them held an order that the law could enforce, whether or not it was ever made final.",
+      "of": "was granted a final protection order, with no expiry date",
+      "head": "Only 1 of the 12 women who applied for the permanent order did not get it",
+      "body": "Almost all women who applied to have the temporary order made permanent were successful. Of the group of 100 we started with, 11 get to this point. But the justice system reached 19 women in total, each who had protection for some time, even if the order didn't become permanent.",
       "legend": [
-        { "class": "d-live",   "n": "8",  "label": "interim order only" },
+        { "class": "d-live",   "n": "8",  "label": "temporary order only" },
         { "class": "d-strong", "n": "1",  "label": "applied, not granted" },
         { "class": "d-final",  "n": "11", "label": "final order, no expiry date" }
       ]
