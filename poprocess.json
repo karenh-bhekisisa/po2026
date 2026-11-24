@@ -160,9 +160,9 @@
       "short": "In case of a breach",
       "sub": "what to do",
       "icon": "calling",
-      "title": "If he breaches the order",
-      "action": "Report to the police that the rules of the order have been broken and ask them for an arrest.",
-      "where": "The police",
+      "title": "If the rules are disobeyed",
+      "action": "Tell the police that the rules of the order have been broken and ask them for an arrest.",
+      "where": "The police station",
       "law": [
         "A breach of a protection order is a criminal matter. The survivor can ask the police to arrest the perpetrator."
         

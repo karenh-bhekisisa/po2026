@@ -2,8 +2,8 @@
   "meta": {
     "pageTitle": "Protection Orders 2026 - Application Numbers",
     "panelHeading": "Step by Step numbers in a group of 100 women",
-    "tableButtonShow": "Show the numbers",
-    "tableButtonHide": "Hide the numbers",
+    "tableButtonShow": "See the numbers from the study",
+    "tableButtonHide": "Hide the numbers from the study",
     "tableCaption": "Women at each stage of the protection order process",
     "tableColumns": ["Stage", "Women", "Dots"]
   },
@@ -47,7 +47,7 @@
       "held": 19,
       "n": "12",
       "of": "women went on to make the temporary protection order permanent",
-      "head": "7 women decided no to go ahead",
+      "head": "7 women decided not to go ahead",
       "body": "The most common reason why women decided not to go ahead with making the order permanent was that family &mdash; either hers or his &mdash; begged her not to go through with it, apologising and promising that he would change. Others feared that getting a permanent order would make the violence worse. However, even with a temporary order, women were protected for several weeks.",
       "legend": [
         { "class": "d-live",   "n": "7",  "label": "kept the interim order only" },
@@ -75,11 +75,11 @@
 
   "funnel": [
     ["Eligible for an order", "9 674", "100"],
-    ["Tried to apply", "2 181", "23"],
-    ["Submitted an application", "2 014", "21"],
+    ["Started application", "2 181", "23"],
+    ["Submitted application", "2 014", "21"],
     ["Granted an interim order", "1 808", "19"],
-    ["Applied to finalise", "1 170", "12"],
-    ["Finalised the order", "1 083", "11"]
+    ["Applied for final order", "1 170", "12"],
+    ["Finalised order granted", "1 083", "11"]
   ],
 
   "source": {

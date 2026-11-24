@@ -327,6 +327,7 @@
      steps[] – remaining, n, of, head, body   (HTML entities allowed)
      funnel  – rows for the "Show the numbers" table
      source  – citation text and footer logo
+     See the numbers from the study
    =========================================================================== */
 
 const DATA_URL = './ponumbers.json';
@@ -518,8 +519,8 @@ function wireControls() {
     $('tablebox').hidden = !open;
     e.target.setAttribute('aria-expanded', String(open));
     e.target.textContent = open
-      ? (meta.tableButtonHide || 'Hide the numbers')
-      : (meta.tableButtonShow || 'Show the numbers');
+      ? (meta.tableButtonHide || 'Hide the numbers from the study')
+      : (meta.tableButtonShow || 'See the numbers from the study');
     postHeight();
   });
 }
