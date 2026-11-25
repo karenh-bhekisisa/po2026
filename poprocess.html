@@ -468,7 +468,7 @@ function postHeight() {
 new ResizeObserver(postHeight).observe(document.documentElement);
 addEventListener('load', postHeight);
  
-[300, 1000, 2500].forEach(t => setTimeout(postHeight, t));
+[300, 1000, 2500, 6000].forEach(t => setTimeout(postHeight, t));
 load();
 </script>
 </body>
