@@ -19,7 +19,7 @@
       "n": "100",
       "of": "women",
       "head": "Every one of these women had grounds to apply for a protection order",
-      "body": "All had been beaten, strangled, raped, threatened with a weapon or stalked by a partner in the past year."
+      "body": "All had been beaten, strangled, raped, threatened with a weapon, severely controlled or stalked by a partner in the past year."
     },
     {
       "remaining": 23,
@@ -33,7 +33,7 @@
       "n": "21",
       "of": "women submitted the application",
       "head": "2 who started the process did not complete the form",
-      "body": "The research found that some women were talked out of lodging an application by police officers or court officials. Others did not have any help in filling in the form &mdash; which must be in English. Some took the papers home, where their partner found them and tore them up."
+      "body": "The research found that some women were talked out of lodging an application by police officers or court officials. Others did not have any help in filling in the form &mdash; especially when English was a problem. Some took the papers home, where their partner found them and tore them up."
     },
     {
       "remaining": 19,
@@ -48,7 +48,7 @@
       "n": "12",
       "of": "women went on to make the temporary protection order permanent",
       "head": "7 women decided not to go ahead",
-      "body": "The most common reason why women decided not to go ahead with making the order permanent was that family &mdash; either hers or his &mdash; begged her not to go through with it, apologising and promising that he would change. Others feared that getting a permanent order would make the violence worse. However, even with a temporary order, women were protected for several weeks.",
+      "body": "The most common reason why women decided not to go ahead with making the order permanent was that the man or family members begged her not to go through with it, apologising and promising that he would change. Others feared that getting a permanent order would make the violence worse.",
       "legend": [
         { "class": "d-live",   "n": "7",  "label": "kept the interim order only" },
         { "class": "d-strong", "n": "12", "label": "applied to finalise" }
@@ -62,7 +62,7 @@
         { "upTo": 19, "class": "d-live"   }
       ],
       "n": "11",
-      "of": "was granted a final protection order, with no expiry date",
+      "of": "were granted a final protection order, with no expiry date",
       "head": "Only 1 of the 12 women who applied for the permanent order did not get it",
       "body": "Almost all women who applied to have the temporary order made permanent were successful. Of the group of 100 we started with, 11 get to this point. But the justice system reached 19 women in total, each who had protection for some time, even if the order didn't become permanent.",
       "legend": [

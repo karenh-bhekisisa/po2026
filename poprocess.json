@@ -19,14 +19,14 @@
   ],
   "stages": [
     {
-      "short": "The incident",
+      "short": "A violent incident",
       "sub": "where it starts",
       "icon": "standing",
       "title": "After an incident of violence",
       "action": "You can open a criminal case, apply for a protection order, or do both.",
       "where": "A police station or a magistrate's court",
       "law": [
-        "A survivor can do one of two things, or both. A criminal case can be opened at a police station. An application for a protection order can be completed at the police station but it has to be lodged at a magistrate&rsquo;s court. One action does not cancel the other, and doing one does not mean the other has to be done too."
+        "A survivor can do one of two things, or both. A criminal case can be opened at a police station. An application for a protection order has to be lodged at a magistrate&rsquo;s court. One action does not cancel the other, and doing one does not mean the other has to be done too."
       ]
     },
     {
@@ -73,7 +73,7 @@
       ],
       "myths": [
         {
-          "claim": "&ldquo;A man awaiting trial in a correctional facility cannot be served.&rdquo;",
+          "claim": "&ldquo;A man in jail or awaiting trial in a correctional facility cannot be served.&rdquo;",
           "truth": "He can. Several women described court officials telling them otherwise."
         },
         {
