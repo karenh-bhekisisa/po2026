@@ -262,6 +262,18 @@
 
         .footer-logo {
         width: 240px;
+        max-width: 100%;
+        height: auto;
+        }
+
+        /* --- footer: stacked on a phone, side by side above that --------- */
+        @media (max-width:560px){
+            .footer{
+                flex-direction:column;
+                align-items:center;
+                gap:14px
+            }
+            .footer-text{width:100%}
         }
     </style>
 </head>

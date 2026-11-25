@@ -197,6 +197,7 @@
 
         @media (prefers-reduced-motion:reduce){.chev{transition:none}}
         .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+        
         @media (max-width:420px){
         body{font-size:16px}
         h3{font-size:1.1rem}
@@ -218,7 +219,20 @@
 
         .footer-logo {
         width: 240px;
+        max-width: 100%;
+        height: auto;
         }
+
+        /* --- footer: stacked on a phone, side by side above that --------- */
+        @media (max-width:560px){
+            .footer{
+                flex-direction:column;
+                align-items:center;
+                gap:14px
+            }
+            .footer-text{width:100%}
+        }
+        
 </style>
 </head>
 <body>
