@@ -26,7 +26,8 @@
             background:var(--bg);
             color:var(--ink);
             /* font-family:var(--font);*/
-            font-family: 'Source Sans 3', 'Open Sans', 'Source Sans Pro', sans-serif;
+            /*font-family: 'Source Sans 3', 'Open Sans', 'Source Sans Pro', sans-serif;*/
+            font-family: Verdana, Geneva, sans-serif;
             font-size:17px;
             line-height:1.5;
             -webkit-text-size-adjust:100%;
@@ -256,9 +257,7 @@
         </div>
 
     </div>
-
-
-</body>
+ 
 
 <script>
 /* ===========================================================================
@@ -465,5 +464,9 @@ function postHeight() {
 }
 new ResizeObserver(postHeight).observe(document.documentElement);
 addEventListener('load', postHeight);
+ 
+[300, 1000, 2500].forEach(t => setTimeout(postHeight, t));
 load();
 </script>
+</body>
+</html>
