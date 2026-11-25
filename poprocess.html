@@ -51,14 +51,7 @@
         .small{font-size:.82rem;color:var(--ink-muted);line-height:1.45}
         :focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
 
-        /* --- safety bar ---------------------------------------------------------- */
-        .safety{display:flex;gap:10px;align-items:center;justify-content:space-between;
-        flex-wrap:wrap;background:var(--surface);border:1px solid var(--rule);
-        border-radius:var(--radius);padding:9px 12px;margin:0 0 12px}
-        .exit{font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;background:var(--flag);
-        color:#fff;border:0;border-radius:999px;padding:8px 15px}
-        .helpline{font-size:.84rem;color:var(--ink-2)}
-        .helpline b{color:var(--ink);white-space:nowrap}
+        
 
         /* --- stage grid ---------------------------------------------------------
         Eight square cards: four across on a wide screen (two rows of four), two
@@ -270,7 +263,7 @@ const DATA = {
 };
 
 const $ = id => document.getElementById(id);
-const num = n => n.toLocaleString('en-ZA').replace(/[, ]/g, ' ');
+/*const num = n => n.toLocaleString('en-ZA').replace(/[, ]/g, ' ');*/
 
 /* Filled in by load(); see po-stages.json and po-icons.json for the shapes. */
 let STAGES = [], SOURCE = '', ICONS = {};
@@ -452,11 +445,7 @@ addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') go(i - 1);
 });
 
-document.querySelectorAll('[data-exit]').forEach(b => b.addEventListener('click', () => {
-  const away = 'https://www.google.com';
-  try { if (window.top !== window.self) window.top.location.replace(away); } catch (err) {}
-  location.replace(away);
-}));
+
 
 function postHeight() {
   const h = Math.ceil(document.documentElement.getBoundingClientRect().height) + 8;
